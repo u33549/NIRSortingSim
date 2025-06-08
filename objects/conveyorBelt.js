@@ -1,25 +1,29 @@
 class ConveyorBelt extends Object {
-    constructor(pos, size, rotate = 0) {
-        super(pos, size, rotate, system_layer_ctx, 'assets/beltAsset.png');
+    constructor(pos,rotate = 0) {
+        super(pos, { width: 100, height: 80 }, rotate, system_layer_ctx, 'assets/beltAsset.png');
 
-        // Taşıma hızı skaleri
-        const scalar = 1;
+        this.scalarSpeed = 10;
+        this.updateCarryingVector();
+    }
 
-        // Vektörel parçalama (rotasyon açısına göre)
-        const rad = degToRad(this.rotate);
+    updateCarryingVector() {
+        const rad = degToRad(this.rotate % 360);
+
+        const cos = Math.abs(Math.cos(rad)) < 1e-10 ? 0 : Math.cos(rad);
+        const sin = Math.abs(Math.sin(rad)) < 1e-10 ? 0 : Math.sin(rad);
 
         this.carryingSpeed = {
-            x: scalar * Math.cos(rad),
-            y: scalar * Math.sin(rad)
+            x: this.scalarSpeed * cos,
+            y: this.scalarSpeed * sin
         };
 
-        // İstersen taşıma vektörünü ayrıca taşı:
         this.carryingVector = {
             speedX: this.carryingSpeed.x,
             speedY: this.carryingSpeed.y,
             rotateSpeed: 0
         };
     }
+
     applyConveyorForceTo(obj) {
         const { x, y } = obj.pos;
         const bounds = this.bounds;
@@ -28,15 +32,27 @@ class ConveyorBelt extends Object {
         const withinY = y >= bounds.topLeft.y && y <= bounds.bottomLeft.y;
 
         if (withinX && withinY) {
-            obj.addAppliedVector([this.carryingVector.speedX,this.carryingVector.speedY,0]);
+            obj.addAppliedVector({
+                speedX: this.carryingVector.speedX,
+                speedY: this.carryingVector.speedY,
+                rotateSpeed: 0
+            });
         }
     }
 }
 
+// Örnek kullanım
 
-obj1 = new ConveyorBelt(
-    {x: 80, y: 80},
-    {width: 100, height: 80},
-    90
-);
+
+
+
+const conveyors=[]
+for (let i = 0; i < 9; i++) {
+    conveyors.push(
+        new ConveyorBelt(
+            { x: 80+100*i, y: 480 },
+            0
+        )
+    )
+}
 

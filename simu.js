@@ -6,9 +6,13 @@ const frameDuration = 1000 / FPS;
 setInterval(() => {
     // Canvas'ı temizle
     system_layer_ctx.clearRect(0, 0, system_layer.width, system_layer.height);
-    // obj1.applyConveyorForceTo(obj2)
+    for (let i = 0; i < conveyors.length; i++) {
+        conveyors[i].applyConveyorForceTo(obj1);
+        conveyors[i].draw();
+    }
+    ejec1.applyEjectForceTo(obj1)
+    ejec1.draw();
     obj1.draw();
-    obj2.draw();
 
 
 }, frameDuration);

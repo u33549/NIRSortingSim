@@ -145,8 +145,8 @@ class Object {
 }
 
 
-let obj2 = new Object(
-    {x: 80, y: 80},
+let obj1 = new Object(
+    {x: 100, y: 480},
     {width: 20, height: 20},
     0,
     system_layer_ctx,
