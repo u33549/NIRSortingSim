@@ -15,3 +15,7 @@ function lineIntersects(p1, p2, q1, q2) {
 
     return (0 < lambda && lambda < 1) && (0 < gamma && gamma < 1);
 }
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
