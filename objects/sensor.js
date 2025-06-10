@@ -4,6 +4,12 @@ class Sensor extends Object {
 
         this.maxDistance = 100;
         this.detected = false; // Okuma sonucu
+        const self=this;
+        this.drawCallback=function (){
+            const ctx = self.layer;
+            ctx.fillRect(-this.size.width / 2 + this.maxDistance, -this.size.height / 2, this.size.width, this.size.height);
+
+        }
     }
 
     readSensorTo(obj) {
@@ -32,24 +38,6 @@ class Sensor extends Object {
         });
 
         this.detected = intersects;
-    }
-
-    draw() {
-        const ctx = this.layer;
-        ctx.save();
-
-        const angleInRadians = degToRad(this.rotate);
-        ctx.translate(this.pos.x, this.pos.y);
-        ctx.rotate(angleInRadians);
-
-
-
-        ctx.fillStyle = this.color;
-        ctx.fillRect(-this.size.width / 2, -this.size.height / 2, this.size.width, this.size.height);
-        ctx.fillRect(-this.size.width / 2 + this.maxDistance, -this.size.height / 2, this.size.width, this.size.height);
-
-        ctx.restore();
-        this.calc();
     }
 
     getSensorState() {

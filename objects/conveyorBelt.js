@@ -1,7 +1,9 @@
+const conveyor_asseet = new Image();
+conveyor_asseet.src = "assets/beltAsset.png";
+
 class ConveyorBelt extends Object {
     constructor(pos,rotate = 0) {
-        super(pos, { width: 100, height: 80 }, rotate, system_layer_ctx, 'assets/beltAsset.png');
-
+        super(pos, { width: 100, height: 80 }, rotate, system_layer_ctx, conveyor_asseet);
         this.scalarSpeed = 10;
         this.updateCarryingVector();
     }
@@ -46,7 +48,13 @@ class ConveyorBelt extends Object {
 
 
 
-const conveyors=[]
+const conveyors=[];
+
+
+
+
+
+
 for (let i = 0; i < 9; i++) {
     conveyors.push(
         new ConveyorBelt(

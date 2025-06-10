@@ -9,22 +9,21 @@ system_layer.height = canvasHeight;
 
 
 class Object {
-    constructor(pos, size, rotate = 0, layer, asset = null, color = null, speed = {
-        speedX: 0,
-        speedY: 0,
-        rotateSpeed: 0
-    }) {
+    constructor(pos, size, rotate = 0, layer, asset = null, color = null) {
         this.pos = pos;
         this.size = size;
         this.rotate = rotate; // derece
         this.layer = layer;
         this.asset = asset;
         this.color = color;
-        this.speed = speed;
+        this.speed = {speedX: 0, speedY: 0, rotateSpeed: 0};
 
         this.appliedVectors = []; // Uygulanan vektörlerin listesi
 
-        if (this.asset) {
+        if (this.asset instanceof HTMLImageElement) {
+            this.image = this.asset;
+            this.imageLoaded = true;
+        } else if (typeof this.asset === 'string') {
             this.image = new Image();
             this.image.src = this.asset;
 
@@ -36,7 +35,8 @@ class Object {
                 this.imageLoaded = false;
             };
         }
-
+        this.drawPermission = true;
+        this.drawCallback = null;
         this.updateCorners();
         this.updateBounds();
     }
@@ -128,14 +128,21 @@ class Object {
         ctx.translate(this.pos.x, this.pos.y);
         ctx.rotate(angleInRadians);
 
-        if (this.image && this.image.complete && this.image.naturalWidth !== 0) {
-            ctx.drawImage(this.image, -this.size.width / 2, -this.size.height / 2, this.size.width, this.size.height);
-        } else if (this.color) {
-            ctx.fillStyle = this.color;
-            ctx.fillRect(-this.size.width / 2, -this.size.height / 2, this.size.width, this.size.height);
-        } else {
-            ctx.fillStyle = "hotpink";
-            ctx.fillRect(-this.size.width / 2, -this.size.height / 2, this.size.width, this.size.height);
+        if (this.drawPermission) {
+
+
+            if (this.image && this.image.complete && this.image.naturalWidth !== 0) {
+                ctx.drawImage(this.image, -this.size.width / 2, -this.size.height / 2, this.size.width, this.size.height);
+            } else if (this.color) {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size.width / 2, -this.size.height / 2, this.size.width, this.size.height);
+            } else {
+                ctx.fillStyle = "hotpink";
+                ctx.fillRect(-this.size.width / 2, -this.size.height / 2, this.size.width, this.size.height);
+            }
+        }
+        if (this.drawCallback) {
+            this.drawCallback();
         }
 
         ctx.restore();
@@ -156,3 +163,13 @@ let obj1 = new Object(
 // obj1.setSpeed(1,1,0.1)
 
 // obj1.draw();
+
+
+// let obj1 = new Object(
+//     {x: 150, y: 120},
+//     {width: 20, height: 20},
+//     0,
+//     system_layer_ctx,
+//     null,
+//     null
+// );
