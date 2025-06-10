@@ -56,3 +56,16 @@ for (let i = 0; i < 9; i++) {
     )
 }
 
+for (let j = 0; j < 3; j++) {
+    for (let i = 1; i < 6; i++) {
+        conveyors.push(
+            new ConveyorBelt(
+                { x: 350+((230+30)*j)-60, y: 480-80*i -0 },
+                -90
+            )
+        )
+    }
+}
+
+
+
