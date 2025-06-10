@@ -3,7 +3,7 @@ class Ejector extends Object {
         super(pos, { width: 50, height: 10 }, rotate, system_layer_ctx, null, "#c5c5c5");
 
         this.scalarSpeed = 50;
-        this.pushPermission = true; // Yeni özellik
+        this.pushPermission = false; // Yeni özellik
         this.updateCarryingVector();
     }
 
@@ -45,14 +45,14 @@ class Ejector extends Object {
         const forwardComponent = dx * cos + dy * sin;
         const lateralComponent = -dx * sin + dy * cos;
 
-        const ctx = this.layer;
-        ctx.save();
-        ctx.translate(ejectorRightCenter.x, ejectorRightCenter.y);
-        ctx.rotate(rad);
-        ctx.strokeStyle = "rgba(0, 255, 0, 0.6)";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(0, -maxOffset, maxDistance, maxOffset * 2);
-        ctx.restore();
+        // const ctx = this.layer;
+        // ctx.save();
+        // ctx.translate(ejectorRightCenter.x, ejectorRightCenter.y);
+        // ctx.rotate(rad);
+        // ctx.strokeStyle = "rgba(0, 255, 0, 0.6)";
+        // ctx.lineWidth = 1;
+        // ctx.strokeRect(0, -maxOffset, maxDistance, maxOffset * 2);
+        // ctx.restore();
 
         if (this.pushPermission &&
             forwardComponent >= 0 && forwardComponent <= maxDistance &&
@@ -64,15 +64,30 @@ class Ejector extends Object {
             });
         }
     }
+    setPushPermission(value) {
+        this.pushPermission = value === true;
+    }
 }
 
 
+const ejectors=[]
 
-const ejec1=new Ejector(
-    { x: 190, y: 560 },
-    -90
-)
+for (let i = 0; i < 3; i++) {
+    ejectors.push(new Ejector(
+        { x: 330+((230+30)*i)-60, y: 560 },
+        -90
+    ));
+}
 
+ejectors[2].setPushPermission(true);
+
+for (let j = 0; j < 3; j++) {
+    for (let i = 0; i < 3; i++) {
+        ejectors.push(new Ejector(
+            { x: 280+((230+30)*j) -60, y: 320-100*i },0
+        ));
+    }
+}
 
 
 // const conveyors=[]

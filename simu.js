@@ -13,6 +13,10 @@ setInterval(() => {
     ejec1.applyEjectForceTo(obj1)
     ejec1.draw();
     obj1.draw();
+    for (let i = 0; i < ejectors.length; i++) {
+        ejectors[i].applyEjectForceTo(obj1);
+        ejectors[i].draw();
+    }
 
 
 }, frameDuration);
