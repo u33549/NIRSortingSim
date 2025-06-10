@@ -18,5 +18,13 @@ setInterval(() => {
         ejectors[i].draw();
     }
 
+    for (let i = 0; i < sensors.length; i++) {
+        sensors[i].readSensorTo(obj1);
+        sensors[i].draw();
+    }
+
+    obj1.draw();
+    clt1.draw();
+    console.log(sensors[0].detected)
 
 }, frameDuration);
