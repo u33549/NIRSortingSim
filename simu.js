@@ -22,6 +22,5 @@ setInterval(() => {
 
     obj1.draw();
     clt1.draw();
-    console.log(sensors[0].detected)
 
 }, frameDuration);

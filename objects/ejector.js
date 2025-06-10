@@ -36,7 +36,7 @@ class Ejector extends Object {
             y: this.pos.y + halfW * sin
         };
 
-        const maxDistance = 100;
+        const maxDistance = 70;
         const maxOffset = 15;
 
         const dx = obj.pos.x - ejectorRightCenter.x;
@@ -45,14 +45,14 @@ class Ejector extends Object {
         const forwardComponent = dx * cos + dy * sin;
         const lateralComponent = -dx * sin + dy * cos;
 
-        // const ctx = this.layer;
-        // ctx.save();
-        // ctx.translate(ejectorRightCenter.x, ejectorRightCenter.y);
-        // ctx.rotate(rad);
-        // ctx.strokeStyle = "rgba(0, 255, 0, 0.6)";
-        // ctx.lineWidth = 1;
-        // ctx.strokeRect(0, -maxOffset, maxDistance, maxOffset * 2);
-        // ctx.restore();
+        const ctx = this.layer;
+        ctx.save();
+        ctx.translate(ejectorRightCenter.x, ejectorRightCenter.y);
+        ctx.rotate(rad);
+        ctx.strokeStyle = "rgba(0, 255, 0, 0.6)";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(0, -maxOffset, maxDistance, maxOffset * 2);
+        ctx.restore();
 
         if (this.pushPermission &&
             forwardComponent >= 0 && forwardComponent <= maxDistance &&
@@ -74,7 +74,7 @@ const ejectors=[]
 
 for (let i = 0; i < 3; i++) {
     ejectors.push(new Ejector(
-        { x: 330+((230+30)*i)-60, y: 560 },
+        { x: 330+((230+30)*i)-60, y: 550 },
         -90
     ));
 }
