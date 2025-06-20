@@ -108,20 +108,27 @@ function drawSpriteById(ctx, id, x, y, scale = 1) {
 
 
 class Cloth extends Object {
+    static SCALE = 1.5;
     constructor(pos, rotate = 0) {
-        super(pos, {width: 20, height: 25}, rotate, system_layer_ctx, null, "hotpink");
-        this.drawPermission=false;
+        const width = 20 * Cloth.SCALE;
+        const height = 25 * Cloth.SCALE;
+
+        super(pos, { width, height }, rotate, system_layer_ctx, null, "hotpink");
+
         this.spriteId = getRandomInt(0, all_sprites.length - 1);
+        this.drawPermission = false;
 
         const self = this;
         this.drawCallback = function () {
-            console.log(this.spriteId)
             const ctx = self.layer;
-            drawSpriteById(ctx,this.spriteId, 0, 0,1)
-        }
-
+            ctx.save();
+            ctx.scale(Cloth.SCALE, Cloth.SCALE);
+            drawSpriteById(ctx, self.spriteId, 0, 0, 1); // scale 1 çünkü ctx ile yaptık
+            ctx.restore();
+        };
     }
 }
 
 
-const clt1 = new Cloth({x: 150, y: 50}, 40)
+const clt1 = new Cloth({x: 100, y: 460}, 40)
+const clt2 = new Cloth({x: 130, y: 460}, 70)
