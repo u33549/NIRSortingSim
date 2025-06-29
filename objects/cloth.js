@@ -80,16 +80,16 @@ const o_sprites = [
 //     { name: "sprite65", x: 190, y: 147, w: 21, h: 17 }
 // ];
 
-const all_sprites = [...w_sprites,...m_sprites,...c_sprites,...y_sprites,...o_sprites]
 
+const all_sprites = [...w_sprites,...m_sprites,...c_sprites,...y_sprites,...o_sprites]
 
 
 let spriteImage = new Image();
 spriteImage.src = "assets/spritesheet.png";
 
 
-function drawSpriteById(ctx, id, x, y, scale = 1) {
-    const sprite = all_sprites[id];
+function drawSpriteById(ctx, id,category ,x, y, scale = 1) {
+    const sprite = category[id];
     if (!sprite) {
         console.warn(`Sprite with id "${id}" not found.`);
         return;
@@ -106,29 +106,36 @@ function drawSpriteById(ctx, id, x, y, scale = 1) {
 }
 
 
-
 class Cloth extends Object {
     static SCALE = 1.5;
-    constructor(pos, rotate = 0) {
+    constructor(pos, rotate = 0,category=all_sprites,raw_material=null) {
         const width = 20 * Cloth.SCALE;
         const height = 25 * Cloth.SCALE;
+        const materials=["nylon","polyester","fabric"]
 
         super(pos, { width, height }, rotate, system_layer_ctx, null, "hotpink");
+        this.category=category;
+        this.spriteId = getRandomInt(0, this.category.length - 1);
+        this.raw_material=raw_material?materials[raw_material]:materials[getRandomInt(0, 2)];
+        this.color=this.category[this.spriteId].name[0];
 
-        this.spriteId = getRandomInt(0, all_sprites.length - 1);
         this.drawPermission = false;
 
         const self = this;
         this.drawCallback = function () {
             const ctx = self.layer;
             ctx.save();
+
+            ctx.translate(-self.size.width/2, -self.size.height/2);
             ctx.scale(Cloth.SCALE, Cloth.SCALE);
-            drawSpriteById(ctx, self.spriteId, 0, 0, 1); // scale 1 çünkü ctx ile yaptık
+            drawSpriteById(ctx, self.spriteId, self.category, 0, 0, 1); // scale 1 çünkü ctx ile yaptık
             ctx.restore();
         };
     }
 }
 
+const clt1 = new Cloth({x: 100, y: 475}, 70,all_sprites)
+const clt2 = new Cloth({x: 130, y: 475}, 40,all_sprites)
 
 const clt1 = new Cloth({x: 100, y: 460}, 40)
 const clt2 = new Cloth({x: 130, y: 460}, 70)
