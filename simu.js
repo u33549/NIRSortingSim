@@ -8,26 +8,36 @@ setInterval(() => {
     system_layer_ctx.clearRect(0, 0, system_layer.width, system_layer.height);
     camera_layer_ctx.clearRect(0, 0, camera_layer.width, camera_layer.height);
 
-    for (let i = 0; i < conveyors.length; i++) {
-        conveyors[i].applyConveyorForceTo(clt1);
-        conveyors[i].applyConveyorForceTo(clt2);
+    for(let c=0;c<clothes.length;c++){
+        let clt=clothes[c];
 
-        conveyors[i].draw();
-    }
-    for (let i = 0; i < ejectors.length; i++) {
-        ejectors[i].applyEjectForceTo(clt1);
-        ejectors[i].applyEjectForceTo(clt2);
+        for (let i = 0; i < conveyors.length; i++) {
+            conveyors[i].applyConveyorForceTo(clt);
+            conveyors[i].draw();
+        }
+        for (let i = 0; i < ejectors.length; i++) {
+            ejectors[i].applyEjectForceTo(clt);
+            ejectors[i].draw();
+        }
+        for (let i = 0; i < sensors.length; i++) {
+            sensors[i].readSensorTo(clt);
+            sensors[i].draw();
+        }
+        for (let i=0; i<cams.length;i++){
+            cams[i].draw();
+            cams[i].detectObjectsInView(clt);
 
-        ejectors[i].draw();
+        }
+    }
+    for(let c=0;c<clothes.length;c++){
+        let clt=clothes[c];
+        clt.draw();
     }
 
-    for (let i = 0; i < sensors.length; i++) {
-        sensors[i].readSensorTo(clt1);
-        sensors[i].readSensorTo(clt2);
-        sensors[i].draw();
-    }
-    cam1.draw()
-    clt1.draw();
-    clt2.draw();
+
+
 
 }, frameDuration);
+
+
+

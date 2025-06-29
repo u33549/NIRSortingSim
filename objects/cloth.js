@@ -137,5 +137,4 @@ class Cloth extends Object {
 const clt1 = new Cloth({x: 100, y: 475}, 70,all_sprites)
 const clt2 = new Cloth({x: 130, y: 475}, 40,all_sprites)
 
-const clt1 = new Cloth({x: 100, y: 460}, 40)
-const clt2 = new Cloth({x: 130, y: 460}, 70)
+const clothes=[clt1,clt2]

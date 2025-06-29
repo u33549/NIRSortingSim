@@ -47,4 +47,16 @@ class Camera extends Object {
 
 }
 
-const cam1 = new Camera({ x: 100, y: 480 }, { width: 100, height: 80 }, 90, camera_view1_ctx);
+
+
+const cams=[]
+
+for (let j = 0; j < 3; j++) {
+    cams.push(
+        new Camera(
+            { x: 350+((230+30)*j)-60, y: 480-80 -0 },
+            0,
+            camera_view1_ctx
+        )
+    )
+}
