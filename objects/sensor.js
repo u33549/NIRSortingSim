@@ -1,6 +1,9 @@
 class Sensor extends Object {
-    constructor(pos, rotate = 0) {
-        super(pos, {width:2, height: 10}, rotate, system_layer_ctx, null, "#000");
+    constructor(pos, rotate = 0,name) {
+        super(pos, {width:2, height: 10}, rotate, system_layer_ctx, null, "#000",name);
+
+        this.namePos={x:110,y:-15}
+        this.fillStyle = "red";
 
         this.maxDistance = 100;
         this.detected = false; // Okuma sonucu
@@ -55,13 +58,13 @@ const sensors=[]
 
 for (let i = 0; i < 3; i++) {
     sensors.push(
-        new Sensor({x: 300+((230+30)*i)-60, y: 530},-90)
+        new Sensor({x: 300+((230+30)*i)-60, y: 530},-90,`s_${i*4+1}`)
     );
 }
 for (let j = 0; j < 3; j++) {
     for (let i = 0; i < 3; i++) {
         sensors.push(
-            new Sensor({x: 300+((230+30)*j) -60, y: 340-100*i},0)
+            new Sensor({x: 300+((230+30)*j) -60, y: 340-100*i},0,`s_${j*4+i+2}`)
         );
     }
 }

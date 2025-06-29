@@ -1,11 +1,14 @@
 class Camera extends Object {
-    constructor(pos, rotate = 0, viewContext = null) {
+    constructor(pos, rotate = 0, viewContext = null,name) {
 
-        super(pos, { width: 15, height: 15 }, rotate, camera_layer_ctx, null, "black");
+        super(pos, { width: 35, height: 15 }, rotate, camera_layer_ctx, null, "black",name);
+        this.namePos={x:0,y:0};
+
         this.range = { width: 85, height: 40 }; // {width: number, height: number} formatında dikdörtgensel menzil
         this.captureLayer = system_layer_ctx;
-        const self = this;
+        this.readableValue=null;
 
+        const self = this;
         this.drawCallback = function () {
             const ctx = self.captureLayer;
             ctx.save();
@@ -18,12 +21,7 @@ class Camera extends Object {
             ctx.stroke();
             ctx.restore();
 
-            if (self.viewData && self.viewContext) {
-                const vctx = self.viewContext;
-                vctx.canvas.width = self.viewData.width;
-                vctx.canvas.height = self.viewData.height;
-                vctx.putImageData(self.viewData, 0, 0);
-            }
+
         };
     }
 
@@ -41,7 +39,7 @@ class Camera extends Object {
 
         if (forward >= -halfW && forward <= halfW &&
             lateral >= -halfH && lateral <= halfH) {
-            console.log("Detected object:", obj);
+            this.readableValue=obj.color;
         }
     }
 
@@ -56,7 +54,8 @@ for (let j = 0; j < 3; j++) {
         new Camera(
             { x: 350+((230+30)*j)-60, y: 480-80 -0 },
             0,
-            camera_view1_ctx
+            camera_view1_ctx,
+            `cam${j+1}`
         )
     )
 }

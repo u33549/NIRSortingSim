@@ -1,7 +1,9 @@
 class Ejector extends Object {
-    constructor(pos, rotate = 0) {
-        super(pos, { width: 50, height: 10 }, rotate, system_layer_ctx, null, "#c5c5c5");
+    constructor(pos, rotate = 0,name) {
+        super(pos, { width: 50, height: 10 }, rotate, system_layer_ctx, null, "#c5c5c5",name);
 
+        this.namePos={x:0,y:-15}
+        this.fillStyle = "green";
         this.scalarSpeed = 50;
         this.pushPermission = false; // Yeni özellik
         this.updateCarryingVector();
@@ -75,7 +77,8 @@ const ejectors=[]
 for (let i = 0; i < 3; i++) {
     ejectors.push(new Ejector(
         { x: 330+((230+30)*i)-60, y: 550 },
-        -90
+        -90,
+        `e_${i*4+1}`
     ));
 }
 
@@ -84,7 +87,7 @@ ejectors[2].setPushPermission(true);
 for (let j = 0; j < 3; j++) {
     for (let i = 0; i < 3; i++) {
         ejectors.push(new Ejector(
-            { x: 280+((230+30)*j) -60, y: 320-100*i },0
+            { x: 280+((230+30)*j) -60, y: 320-100*i },0,`e_${j*4+i+2}`
         ));
     }
 }

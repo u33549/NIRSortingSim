@@ -1,11 +1,18 @@
 class Object {
-    constructor(pos, size, rotate = 0, layer, asset = null, color = null) {
+    constructor(pos, size, rotate = 0, layer, asset = null, color = null,name=null) {
         this.pos = transformX+transformY?{x: pos.x+transformX, y: pos.y+transformY}:pos;
         this.size = size;
         this.rotate = rotate; // derece
         this.layer = layer;
         this.asset = asset;
         this.color = color;
+
+        this.name=name;
+        this.namePos=null;
+        this.font = "bold 14px Arial";
+        this.fillStyle = "blue";
+        this.nameWritePremission=true;
+
         this.speed = {speedX: 0, speedY: 0, rotateSpeed: 0};
 
         this.appliedVectors = []; // Uygulanan vektörlerin listesi
@@ -134,7 +141,14 @@ class Object {
         if (this.drawCallback) {
             this.drawCallback();
         }
+        if(this.name){
+            ctx.font =  this.font;
+            ctx.fillStyle =  this.fillStyle;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(this.name, this.namePos.x, this.namePos.y);
 
+        }
         ctx.restore();
         this.calc()
 
