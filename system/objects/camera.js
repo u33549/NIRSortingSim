@@ -1,5 +1,5 @@
 class Camera extends Object {
-    constructor(pos, rotate = 0, viewContext = null,name) {
+    constructor(pos, rotate = 0, name) {
 
         super(pos, { width: 35, height: 15 }, rotate, camera_layer_ctx, null, "black",name);
         this.namePos={x:0,y:0};
@@ -63,7 +63,6 @@ cams.push(
     new Camera(
         { x: 80+100+5, y: 480 },
         90,
-        camera_view1_ctx,
         `cam${1}`
     )
 )
@@ -73,7 +72,6 @@ for (let j = 0; j < 3; j++) {
         new Camera(
             { x: 350+((230+30)*j)-60, y: 480-80 -0 },
             0,
-            camera_view1_ctx,
             `cam${j+2}`
         )
     )

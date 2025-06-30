@@ -119,13 +119,20 @@ class Cloth extends Object {
         this.raw_material=raw_material?materials[raw_material]:materials[getRandomInt(0, 2)];
         this.color=this.category[this.spriteId].name[0];
 
+        this.name=this.raw_material;
+        this.namePos={x:0,y:-30};
+        this.font = "bold 14px Arial";
+        this.fillStyle = "rgba(255,255,255,0.5)";
+        this.nameWritePremision=true;
+
         this.drawPermission = false;
 
         const self = this;
         this.drawCallback = function () {
             const ctx = self.layer;
-            ctx.save();
-
+            ctx.fillStyle = "rgba(0,0,0,0.5)";
+            ctx.fillRect(-30, -40, 60, 20);
+            ctx.save()
             ctx.translate(-self.size.width/2, -self.size.height/2);
             ctx.scale(Cloth.SCALE, Cloth.SCALE);
             drawSpriteById(ctx, self.spriteId, self.category, 0, 0, 1); // scale 1 çünkü ctx ile yaptık

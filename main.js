@@ -41,7 +41,7 @@ function loop() {
         }
         if (cameraValue[1] == null && cameraValue[0] != null) {
             item.color = cameraValue[0];
-            console.log(item)
+            // console.log(item)
 
             // console.table(unCalculatedItems);
         }
@@ -49,7 +49,7 @@ function loop() {
     }
     if (STATE == "CALCULATING") {
         if (item && item.color && item.color !== "o") {
-            console.log(item)
+            // console.log(item)
             let timerBase;
             let mainLineEjectorId;
 
@@ -77,16 +77,16 @@ function loop() {
                 add_ejectorToggle(subEjectorId, timerBase + 5)
             }
             else if (item.color == "c") {
-                console.log(item)
+                // console.log(item)
                 add_ejectorToggle(subEjectorId+1, timerBase + 5 + 8)
             }
             else if (item.color == "y") {
-                console.log(item)
+                // console.log(item)
                 add_ejectorToggle(subEjectorId+2, timerBase + 5 + 8 + 8)
             }
 
             item = null;
-            console.log("aaa")
+            // console.log("aaa")
         }
 
         STATE = "COUNTING"
@@ -103,7 +103,7 @@ function loop() {
     if (STATE == "ACTION") {
         let actionList = processQueue.filter(item => item.timer == 0);
         if (actionList.length > 0) {
-            console.table(actionList)
+            // console.table(actionList)
         }
         for (i = 0; i < actionList.length; i++) {
             ejectors[actionList[i].ejectorId - 1].togglePushPermission();
@@ -114,7 +114,7 @@ function loop() {
     if (STATE == "WAITING") {
         // console.log("I am WAITING");
         STATE = "READING";
-        console.log("------------")
+        // console.log("------------")
 
 
     }
