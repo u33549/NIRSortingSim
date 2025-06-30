@@ -85,7 +85,7 @@ const all_sprites = [...w_sprites,...m_sprites,...c_sprites,...y_sprites,...o_sp
 
 
 let spriteImage = new Image();
-spriteImage.src = "assets/spritesheet.png";
+spriteImage.src = "system/assets/spritesheet.png";
 
 
 function drawSpriteById(ctx, id,category ,x, y, scale = 1) {

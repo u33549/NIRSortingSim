@@ -1,5 +1,5 @@
 const conveyor_asseet = new Image();
-conveyor_asseet.src = "assets/beltAsset.png";
+conveyor_asseet.src = "system/assets/beltAsset.png";
 
 class ConveyorBelt extends Object {
     constructor(pos,rotate = 0) {
