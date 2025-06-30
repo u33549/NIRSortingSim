@@ -43,7 +43,7 @@ class Sensor extends Object {
         this.detected = intersects;
     }
 
-    getSensorState() {
+    getSensorValue() {
         return this.detected;
     }
 }
@@ -56,17 +56,21 @@ const sensors=[]
 // let sens1 = new Sensor({x: 200, y: 540},-90);
 
 
-for (let i = 0; i < 3; i++) {
-    sensors.push(
-        new Sensor({x: 300+((230+30)*i)-60, y: 530},-90,`s_${i*4+1}`)
-    );
-}
-for (let j = 0; j < 3; j++) {
-    for (let i = 0; i < 3; i++) {
-        sensors.push(
-            new Sensor({x: 300+((230+30)*j) -60, y: 340-100*i},0,`s_${j*4+i+2}`)
-        );
-    }
-}
+// for (let i = 0; i < 3; i++) {
+//     sensors.push(
+//         new Sensor({x: 300+((230+30)*i)-60, y: 530},-90)
+//     );
+// }
+// for (let j = 0; j < 3; j++) {
+//     for (let i = 0; i < 3; i++) {
+//         sensors.push(
+//             new Sensor({x: 300+((230+30)*j) -60, y: 340-100*i},0)
+//         );
+//     }
+// }
+//
+// for(let i = 0; i < sensors.length; i++) {
+//     sensors[i].name=`s_${i+1}`
+// }
 
 // let sens1 = new Sensor({x: 200, y: 200},-90);
