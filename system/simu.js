@@ -39,8 +39,13 @@ function applicatons(){
         }
         nir.readNIRTo(clt);
     }
+    for (let i=0; i<cams.length;i++){
+        cams[i].detectObjectsInView(clothes);
+    }
 
 }
+
+let timeC=0;
 
 setInterval(() => {
     // Canvas'ı temizle
@@ -49,7 +54,8 @@ setInterval(() => {
 
     draw();
     applicatons();
-
+    loop();
+    timeC++;
 
 
 
