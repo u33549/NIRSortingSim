@@ -25,29 +25,48 @@ class Camera extends Object {
         };
     }
 
-    detectObjectsInView(obj) {
+    detectObjectsInView(objs) {
         const rad = degToRad(this.rotate % 360);
         const cos = Math.cos(rad);
         const sin = Math.sin(rad);
         const halfW = this.range.width / 2;
         const halfH = this.range.height / 2;
-        const dx = obj.pos.x - this.pos.x;
-        const dy = obj.pos.y - this.pos.y;
 
-        const forward = dx * cos + dy * sin;
-        const lateral = -dx * sin + dy * cos;
+        for (let i = 0; i < objs.length; i++) {
+            let obj=objs[i]
+            let dx = obj.pos.x - this.pos.x;
+            let dy = obj.pos.y - this.pos.y;
 
-        if (forward >= -halfW && forward <= halfW &&
-            lateral >= -halfH && lateral <= halfH) {
-            this.readableValue=obj.color;
+            let forward = dx * cos + dy * sin;
+            let lateral = -dx * sin + dy * cos;
+
+            if (forward >= -halfW && forward <= halfW &&
+                lateral >= -halfH && lateral <= halfH) {
+                this.readableValue=obj.color;
+                return;
+            }
         }
+        this.readableValue=null;
+
     }
 
+    getSensorValue() {
+        return this.readableValue;
+    }
 }
 
 
 
 const cams=[]
+
+cams.push(
+    new Camera(
+        { x: 80+100+5, y: 480 },
+        90,
+        camera_view1_ctx,
+        `cam${1}`
+    )
+)
 
 for (let j = 0; j < 3; j++) {
     cams.push(
@@ -55,7 +74,8 @@ for (let j = 0; j < 3; j++) {
             { x: 350+((230+30)*j)-60, y: 480-80 -0 },
             0,
             camera_view1_ctx,
-            `cam${j+1}`
+            `cam${j+2}`
         )
     )
 }
+

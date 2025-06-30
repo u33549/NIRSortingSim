@@ -51,7 +51,7 @@ class Ejector extends Object {
         ctx.save();
         ctx.translate(ejectorRightCenter.x, ejectorRightCenter.y);
         ctx.rotate(rad);
-        ctx.strokeStyle = "rgba(0, 255, 0, 0.6)";
+        ctx.strokeStyle = this.pushPermission?"rgba(0, 255, 0, 1)":"rgba(255, 0, 0, 1)";
         ctx.lineWidth = 1;
         ctx.strokeRect(0, -maxOffset, maxDistance, maxOffset * 2);
         ctx.restore();
@@ -69,6 +69,9 @@ class Ejector extends Object {
     setPushPermission(value) {
         this.pushPermission = value === true;
     }
+    togglePushPermission() {
+        this.pushPermission= !this.pushPermission;
+    }
 }
 
 
@@ -77,21 +80,21 @@ const ejectors=[]
 for (let i = 0; i < 3; i++) {
     ejectors.push(new Ejector(
         { x: 330+((230+30)*i)-60, y: 550 },
-        -90,
-        `e_${i*4+1}`
+        -90
     ));
 }
 
-ejectors[2].setPushPermission(true);
 
 for (let j = 0; j < 3; j++) {
     for (let i = 0; i < 3; i++) {
         ejectors.push(new Ejector(
-            { x: 280+((230+30)*j) -60, y: 320-100*i },0,`e_${j*4+i+2}`
+            { x: 280+((230+30)*j) -60, y: 320-100*i },0
         ));
     }
 }
-
+for(let i = 0; i < ejectors.length; i++) {
+    ejectors[i].name=`e_${i+1}`
+}
 
 // const conveyors=[]
 // for (let i = 0; i < 9; i++) {

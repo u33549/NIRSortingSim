@@ -22,6 +22,7 @@ class NirMachine extends Object {
 
 
         };
+
         this.readableValue=null;
     }
 
@@ -64,6 +65,9 @@ class NirMachine extends Object {
         this.readableValue=intersects?obj.raw_material:null;
     }
 
+    getSensorValue() {
+        return this.readableValue;
+    }
 
 }
 
