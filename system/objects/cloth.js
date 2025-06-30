@@ -111,7 +111,7 @@ class Cloth extends Object {
     constructor(pos, rotate = 0,category=all_sprites,raw_material=null) {
         const width = 20 * Cloth.SCALE;
         const height = 25 * Cloth.SCALE;
-        const materials=["nylon","polyester","fabric"]
+        const materials=["nylon","polyester","cotton"]
 
         super(pos, { width, height }, rotate, system_layer_ctx, null, "hotpink");
         this.category=category;
@@ -134,7 +134,9 @@ class Cloth extends Object {
     }
 }
 
-const clt1 = new Cloth({x: 100, y: 475}, 70,all_sprites)
-const clt2 = new Cloth({x: 130, y: 475}, 40,all_sprites)
+// const clt1 = new Cloth({x: 100, y: 475}, 70,all_sprites)
+// const clt2 = new Cloth({x: 130, y: 475}, 40,all_sprites)
 
-const clothes=[clt1,clt2]
+// const clothes=[clt1,clt2]
+const clothes=[]
+
